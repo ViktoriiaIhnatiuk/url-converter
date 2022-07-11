@@ -8,7 +8,6 @@ public class UrlRequestDto {
     public UrlRequestDto() {
     }
 
-
     public String getUrlFull() {
         return urlFull;
     }
@@ -19,8 +18,12 @@ public class UrlRequestDto {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         UrlRequestDto that = (UrlRequestDto) o;
         return urlFull.equals(that.urlFull);
     }

@@ -6,8 +6,8 @@ import com.example.urlconverter.model.Url;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UrlMapper implements RequestDtoMapper<UrlRequestDto, Url>
-        , ResponseDtoMapper<UrlResponseDto, Url> {
+public class UrlMapper implements RequestDtoMapper<UrlRequestDto, Url>,
+         ResponseDtoMapper<UrlResponseDto, Url> {
 
     @Override
     public Url mapToModel(UrlRequestDto dto) {

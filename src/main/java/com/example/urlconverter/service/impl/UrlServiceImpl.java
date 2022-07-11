@@ -1,15 +1,15 @@
 package com.example.urlconverter.service.impl;
 
 import com.example.urlconverter.model.Url;
-import com.example.urlconverter.repository.URLRepository;
+import com.example.urlconverter.repository.UrlRepository;
 import com.example.urlconverter.service.UrlService;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UrlServiceImpl implements UrlService {
-    private final URLRepository urlRepository;
+    private final UrlRepository urlRepository;
 
-    public UrlServiceImpl(URLRepository urlRepository) {
+    public UrlServiceImpl(UrlRepository urlRepository) {
         this.urlRepository = urlRepository;
     }
 
@@ -24,6 +24,7 @@ public class UrlServiceImpl implements UrlService {
         return builder.append(getBaseFromUrl(url))
                 .append(getShortUrl(url)).toString();
     }
+
     static String getBaseFromUrl(String url) {
         String[] urlParts = url.split("/");
         StringBuilder builder = new StringBuilder();
@@ -32,15 +33,10 @@ public class UrlServiceImpl implements UrlService {
         }
         return builder.toString();
     }
-//    static String getEndPartFromUrl(String url) {
-////        String[] urlParts = url.split("/");
-////        StringBuilder builder = new StringBuilder();
-////        builder.append(urlParts[urlParts.length - 1]);
-//        return url.replace(getBaseFromUrl(url), "");
-//    }
+
     static String getShortUrl(String url) {
-        char map[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".toCharArray();
-        int hash = url.hashCode();
+        char[] map = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".toCharArray();
+        int hash = Math.abs(url.hashCode() + 31);
         StringBuffer shorturl = new StringBuffer();
         while (hash > 0) {
             shorturl.append(map[hash % 62]);

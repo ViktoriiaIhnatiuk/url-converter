@@ -6,6 +6,4 @@ public interface UrlService {
     Url save(Url url);
 
     String convertUrl(String url);
-
-
 }
