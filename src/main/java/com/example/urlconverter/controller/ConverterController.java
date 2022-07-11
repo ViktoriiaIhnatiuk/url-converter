@@ -4,6 +4,7 @@ import com.example.urlconverter.dto.request.UrlRequestDto;
 import com.example.urlconverter.model.Url;
 import com.example.urlconverter.service.UrlService;
 import com.example.urlconverter.service.mapper.UrlMapper;
+import org.apache.commons.validator.routines.UrlValidator;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,9 +29,14 @@ public class ConverterController {
 
     @PostMapping("/converter")
     public String converterSubmit(@ModelAttribute Url url, UrlRequestDto urlRequestDto) {
-        url.setUrlFull(urlRequestDto.getUrlFull());
-        url.setUrlShort(urlService.convertUrl(urlRequestDto.getUrlFull()));
-        urlMapper.mapToDto(urlService.save(url));
-        return "result";
+        UrlValidator urlValidator = new UrlValidator();
+        if (urlValidator.isValid(urlRequestDto.getUrlFull())) {
+            url.setUrlFull(urlRequestDto.getUrlFull());
+            url.setUrlShort(urlService.convertUrl(urlRequestDto.getUrlFull()));
+            urlMapper.mapToDto(urlService.save(url));
+            return "result";
+        } else {
+            return "invalid";
+        }
     }
 }
