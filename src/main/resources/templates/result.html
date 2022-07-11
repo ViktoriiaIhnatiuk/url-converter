@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <title>result</title>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+</head>
+
+<body>
+
+<h1>Result</h1>
+
+
+<a th:href= "${url.urlFull}" target="_blank"><p th:text="${url.urlShort}" /></a>
+
+<a href="/converter"> <p><input type="submit" value="Submit another URL" /></a>
+
+
+</body>
+
+</html>
